@@ -1,0 +1,65 @@
+<!doctype html>
+<!--
+ @license
+ Copyright 2023 Google LLC. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+-->
+<html>
+  <head>
+    <title>Info Windows</title>
+    <script>
+      /**
+       * @license
+       * Copyright 2023 Google LLC. All Rights Reserved.
+       * SPDX-License-Identifier: Apache-2.0
+       */
+
+      // This example displays a marker on the map.
+      // When the user clicks the marker, an info window opens.
+      async function initMap() {
+        const contentString = `
+          <div>
+            <img src="https://static.vecteezy.com/system/resources/thumbnails/033/837/660/small/happy-school-pupil-asian-boy-in-glasses-on-isolated-on-studio-background-with-copy-space-back-to-school-ai-generative-photo.jpeg" alt="Student Photo" style="width:150px;height:auto;">
+            <h1>John Doe</h1>
+            <p><strong>Class:</strong> 5-A</p>
+            <p><strong>Phone:</strong> (123) 456-7890</p>
+          </div>
+        `;
+        const infoWindow = new google.maps.InfoWindow({
+          content: contentString,
+          ariaLabel: "Student Info",
+        });
+
+        const marker = document.querySelector('gmp-advanced-marker');
+        marker.addEventListener('gmp-click', () => {
+          infoWindow.open({ anchor: marker });
+        });
+      }
+
+      window.initMap = initMap;
+    </script>
+    <style>
+      /**
+       * @license
+       * Copyright 2023 Google LLC. All Rights Reserved.
+       * SPDX-License-Identifier: Apache-2.0
+       */
+
+      /* Optional: Makes the sample page fill the window. */
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <gmp-map center="-25.363, 131.044" zoom="4" map-id="DEMO_MAP_ID">
+      <gmp-advanced-marker position="-25.363, 131.044" title="Student Info" gmp-clickable></gmp-advanced-marker>
+    </gmp-map>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=INSERT_YOUR_API_KEY&callback=initMap&libraries=marker&v=beta&solution_channel=GMP_CCS_infowindows_v2"
+      defer
+    ></script>
+  </body>
+</html>
